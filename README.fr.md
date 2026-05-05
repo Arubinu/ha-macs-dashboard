@@ -1,5 +1,7 @@
 # 🏠 Dashboard Tablette Home Assistant
 
+https://github.com/user-attachments/assets/1954b7b9-e99b-45d3-94ab-533569a17c86
+
 Un dashboard Home Assistant riche en fonctionnalités, conçu pour les **tablettes murales** (ou toute tablette) en **orientation paysage uniquement**. Construit avec une collection de cartes Lovelace personnalisées, il offre une expérience soignée, prête pour une installation en mode kiosque.
 
 > 🚧 **Travaux en cours** — Ce dashboard est encore en développement actif. Des changements, de la documentation manquante et des fonctionnalités incomplètes sont à prévoir.

@@ -1,0 +1,147 @@
+binary_sensor:
+  - name: "Alvin: Maison"
+    device_class: presence
+    state: "{{ is_state('device_tracker.alvin_telephone', 'home') }}"
+    attributes:
+      data: >
+        {% set sensor = 'device_tracker.alvin_telephone' %}
+        {% if is_state(sensor, 'home') %}
+          0
+        {% else %}
+          {{ distance(sensor) | round() }}
+        {% endif %}
+    delay_on:
+      minutes: 2
+    delay_off:
+      minutes: 2
+
+sensor:
+  - name: "Zones Icon"
+    unique_id: zones_icon
+    state: "{{ states.zone | count }}"
+    attributes:
+      data: >
+        {% set ns = namespace(zones={}) %}
+        {% for s in states.zone %}
+          {% set name = s.attributes.friendly_name %}
+          {% set icon = s.attributes.icon | default('mdi:map-marker') %}
+          {% set ns.zones = dict(ns.zones, **{name: icon}) %}
+        {% endfor %}
+        {{ ns.zones | to_json }}
+
+  - name: "Alertes Météo: Jaune"
+    icon: "mdi:weather-cloudy-alert"
+    state: >
+      {%- set attr = states['sensor.69_weather_alert'].attributes %}
+      {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Jaune') | list | count }}
+    attributes:
+      array: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Jaune') | map(attribute=0) | list }}
+      names: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Jaune') | map(attribute=0) | list | join(', ') }}
+
+  - name: "Alertes Météo: Orange"
+    icon: "mdi:weather-cloudy-alert"
+    state: >
+      {%- set attr = states['sensor.69_weather_alert'].attributes %}
+      {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Orange') | list | count }}
+    attributes:
+      array: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Orange') | map(attribute=0) | list }}
+      names: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Orange') | map(attribute=0) | list | join(', ') }}
+
+  - name: "Alertes Météo: Rouge"
+    icon: "mdi:weather-cloudy-alert"
+    state: >
+      {%- set attr = states['sensor.69_weather_alert'].attributes %}
+      {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Rouge') | list | count }}
+    attributes:
+      array: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Rouge') | map(attribute=0) | list }}
+      names: >
+        {%- set attr = states['sensor.69_weather_alert'].attributes %}
+        {{- attr.items() | selectattr('0', 'match', '^[A-Z]') | selectattr('1', 'eq', 'Rouge') | map(attribute=0) | list | join(', ') }}
+
+  - name: "Meilleur Prix (Gazole)"
+    unit_of_measurement: "EUR"
+    state_class: measurement
+    state: >
+      {% set value = states.sensor | selectattr('entity_id', 'contains', '_gazole') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_gazole')
+        | map(attribute='state') | map('float', 0) | reject('equalto', 0)
+        | min %}
+      {{ "%.3f" | format(value) }}
+    attributes:
+      name: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_gazole') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_gazole') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {# min_entity.name.rsplit(' ', 1)[0] if min_entity else 'Aucune' #}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='name') | map('regex_replace', find='^(.*) \\S+$', replace='\\1')
+          | list | join(', ') | default(None) }}
+      ids: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_gazole') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_gazole') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='entity_id')
+          | map('regex_replace', '^sensor\\.', '')
+          | list | default([]) }}
+
+  - name: "Meilleur Prix (SP98)"
+    unit_of_measurement: "EUR"
+    state_class: measurement
+    state: >
+      {% set value = states.sensor | selectattr('entity_id', 'contains', '_sp98') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp98')
+        | map(attribute='state') | map('float', 0) | reject('equalto', 0)
+        | min %}
+      {{ "%.3f" | format(value) }}
+    attributes:
+      name: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_sp98') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp98') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {# min_entity.name.rsplit(' ', 1)[0] if min_entity else 'Aucune' #}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='name') | map('regex_replace', find='^(.*) \\S+$', replace='\\1')
+          | list | join(', ') | default(None) }}
+      ids: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_sp98') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp98') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='entity_id')
+          | map('regex_replace', '^sensor\\.', '')
+          | list | default([]) }}
+
+  - name: "Meilleur Prix (SP95)"
+    unit_of_measurement: "EUR"
+    state_class: measurement
+    state: >
+      {% set value = states.sensor | selectattr('entity_id', 'contains', '_sp95') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp95')
+        | map(attribute='state') | map('float', 0) | reject('equalto', 0)
+        | min %}
+      {{ "%.3f" | format(value) }}
+    attributes:
+      name: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_sp95') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp95') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {# min_entity.name.rsplit(' ', 1)[0] if min_entity else 'Aucune' #}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='name') | map('regex_replace', find='^(.*) \\S+$', replace='\\1')
+          | list | join(', ') | default(None) }}
+      ids: >
+        {% set values = states.sensor | selectattr('entity_id', 'contains', '_sp95') | rejectattr('entity_id', 'eq', 'sensor.meilleur_prix_sp95') | list %}
+        {% set min_value = values | map(attribute='state') | map('float', 0) | reject('equalto', 0) | min %}
+        {% set min_entity = values | selectattr('state', '==', min_value | string) | first %}
+        {{ values | selectattr('state', '==', min_value | string)
+          | map(attribute='entity_id')
+          | map('regex_replace', '^sensor\\.', '')
+          | list | default([]) }}

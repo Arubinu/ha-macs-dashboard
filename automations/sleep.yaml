@@ -1,0 +1,26 @@
+alias: "Kiosk: Dors"
+description: ""
+triggers:
+  - trigger: time
+    at: "22:00:00"
+    id: sleeping
+  - trigger: time
+    at: "06:00:00"
+    id: idle
+conditions: []
+actions:
+  - if:
+      - condition: trigger
+        id:
+          - sleeping
+    then:
+      - action: macs.set_mood
+        metadata: {}
+        data:
+          mood: sleeping
+    else:
+      - action: macs.set_mood
+        metadata: {}
+        data:
+          mood: idle
+mode: single

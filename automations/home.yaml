@@ -1,0 +1,33 @@
+alias: "Kiosk: Retour à M.A.C.S."
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.kiosk
+    from:
+      - "on"
+    to:
+      - "off"
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+conditions: []
+actions:
+  - action: browser_mod.navigate
+    metadata: {}
+    data:
+      browser_id:
+        - f2d75e0a3023f4bc4272e8ca7ef0aece
+      path: /m.a.c.s./home
+    enabled: false
+  - action: macs.set_mood
+    metadata: {}
+    data:
+      mood: idle
+  - action: fully_kiosk.load_url
+    metadata: {}
+    data:
+      url: javascript:fully.focusTabByIndex(0);
+      device_id: 00000000000000000000000000000000
+mode: single

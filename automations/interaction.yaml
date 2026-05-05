@@ -1,0 +1,37 @@
+alias: "Kiosk: Intéraction"
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.kiosk
+    to:
+      - "on"
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+conditions: []
+actions:
+  - action: select.random
+    metadata: {}
+    target:
+      entity_id: select.macs_mood
+    data:
+      options: confused happy bored
+    enabled: false
+  - variables:
+      state: "{{ states('select.macs_mood') }}"
+  - action: macs.set_mood
+    metadata: {}
+    data:
+      mood: "{{ ['confused', 'happy', 'bored'] | random }}"
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - action: macs.set_mood
+    metadata: {}
+    data:
+      mood: "{{ state }}"
+mode: single

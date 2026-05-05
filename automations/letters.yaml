@@ -1,0 +1,43 @@
+alias: Boite aux lettres
+description: ""
+triggers:
+  - type: occupied
+    device_id: 00000000000000000000000000000000
+    entity_id: 00000000000000000000000000000000
+    domain: binary_sensor
+    trigger: device
+  - trigger: time
+    id: midnight
+    at: "00:00:00"
+conditions:
+  - alias: Si la dernière activation s'est déroulée y a plus de 10 minutes
+    condition: template
+    value_template: >-
+      {{ now() - state_attr('automation.boite_aux_lettres', 'last_triggered') >
+      timedelta(minutes=10) }}
+  - alias: Si Zigbee2MQTT a changé d'état depuis plus de 5 minutes
+    condition: template
+    value_template: >-
+      {{ now() -
+      states.binary_sensor.zigbee2mqtt_bridge_connection_state.last_updated >
+      timedelta(minutes=5) }}
+actions:
+  - if:
+      - condition: trigger
+        id:
+          - midnight
+    then:
+      - action: input_text.set_value
+        metadata: {}
+        target:
+          entity_id: input_text.boite_aux_lettre_alerte
+        data:
+          value: unknown
+    else:
+      - action: input_text.set_value
+        metadata: {}
+        target:
+          entity_id: input_text.boite_aux_lettre_alerte
+        data:
+          value: "{{ states('sensor.time') }}"
+mode: single

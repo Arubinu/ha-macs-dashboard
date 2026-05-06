@@ -1,8 +1,10 @@
-# 🏠 Dashboard Tablette Home Assistant
+# 🏠 Home Assistant M.A.C.S. Dashboard
 
 https://github.com/user-attachments/assets/1954b7b9-e99b-45d3-94ab-533569a17c86
 
-Un dashboard Home Assistant riche en fonctionnalités, conçu pour les **tablettes murales** (ou toute tablette) en **orientation paysage uniquement**. Construit avec une collection de cartes Lovelace personnalisées, il offre une expérience soignée, prête pour une installation en mode kiosque.
+*__Read this in:__ [English](README.md) | Français*
+
+Un dashboard Home Assistant riche en fonctionnalités, conçu pour les **tablettes** en **orientation paysage uniquement**. Construit avec une collection de cartes Lovelace personnalisées, il offre une expérience soignée, prête pour une installation en mode kiosque.
 
 > 🚧 **Travaux en cours** — Ce dashboard est encore en développement actif. Des changements, de la documentation manquante et des fonctionnalités incomplètes sont à prévoir.
 
@@ -40,22 +42,21 @@ Tous les plugins ci-dessous sont disponibles via HACS sauf indication contraire.
 
 | Plugin | Description |
 |---|---|
-| [MACS](https://github.com/glyndavidson/MACS) | Mood-Aware Character SVG — compagnon animé |
-| [button-card](https://github.com/custom-cards/button-card) | Carte bouton hautement personnalisable |
 | [alarmo-card](https://github.com/nielsfaber/alarmo-card) | Carte panneau d'alarme pour l'intégration Alarmo |
-| [lovelace-state-switch](https://github.com/thomasloven/lovelace-state-switch) | Afficher/masquer des cartes selon l'état d'une entité |
-| [embedded-view-card](https://github.com/redkanoon/embedded-view-card) | Intégrer une vue Lovelace dans une autre |
+| [state-switch](https://github.com/thomasloven/lovelace-state-switch) | Afficher/masquer des cartes selon l'état d'une entité ou un hash |
 | [Bubble Card](https://github.com/Clooos/Bubble-Card) | Carte minimaliste avec support pop-up |
-| [clock-weather-card](https://github.com/pkissling/clock-weather-card) | Carte combinée horloge et météo |
-| [simple-swipe-card](https://github.com/nutteloost/simple-swipe-card) | Navigation tactile par glissement entre cartes |
-| [mini-graph-card](https://github.com/kalkih/mini-graph-card) | Carte graphique compacte pour l'historique de capteurs |
-| [restriction-card](https://github.com/iantrich/restriction-card) | Ajouter des restrictions/protection à n'importe quelle carte |
-| [horizontal-waterfall-history-card](https://github.com/sxdjt/horizontal-waterfall-history-card) | Visualisation historique en cascade horizontale |
-| [calendar-card-pro](https://github.com/alexpfau/calendar-card-pro) | Carte calendrier avancée |
-| [lovelace-plotly-graph-card](https://github.com/dbuezas/lovelace-plotly-graph-card) | Carte graphique puissante basée sur Plotly |
-| [hash-timer-card](https://github.com/Arubinu/hash-timer-card) | Carte minuterie (dépôt personnalisé — voir ci-dessous) |
-| [hass-prixcarburant](https://github.com/Aohzan/hass-prixcarburant) | Intégration des prix carburant français |
-| [Spook](https://github.com/frenck/spook) | Appels de services étendus pour HA, utilisé dans les automatisations |
+| [Button Card](https://github.com/custom-cards/button-card) | Carte bouton hautement personnalisable |
+| [Calendar Card Pro](https://github.com/alexpfau/calendar-card-pro) | Carte calendrier avancée |
+| [Clock Weather Card](https://github.com/pkissling/clock-weather-card) | Carte combinée horloge et météo |
+| [Embedded View Card](https://github.com/redkanoon/embedded-view-card) | Intégrer une vue Lovelace dans une autre |
+| [M.A.C.S.](https://github.com/glyndavidson/MACS) | Mood-Aware Character SVG — compagnon animé |
+| [Mini Graph Card](https://github.com/kalkih/mini-graph-card) | Carte graphique compacte pour l'historique de capteurs |
+| [Plotly Graph Card](https://github.com/dbuezas/lovelace-plotly-graph-card) | Carte graphique puissante basée sur Plotly |
+| [Prix Carburant](https://github.com/Aohzan/hass-prixcarburant) | Intégration des prix carburant Français |
+| [Restriction Card](https://github.com/iantrich/restriction-card) | Ajouter des restrictions/protection à n'importe quelle carte |
+| [Simple Swipe Card](https://github.com/nutteloost/simple-swipe-card) | Navigation tactile par glissement entre cartes |
+| [Spook](https://github.com/frenck/spook) | Appels de services étendus, utilisé dans les automatisations |
+| [Waterfall History Card](https://github.com/sxdjt/horizontal-waterfall-history-card) | Visualisation historique en horizontale |
 
 ### Dépôts personnalisés (à ajouter manuellement dans HACS)
 
@@ -64,10 +65,10 @@ Ces dépôts ne sont pas dans le catalogue HACS par défaut et doivent être ajo
 | Plugin | Description |
 |---|---|
 | [AlertTicker-Card](https://github.com/djdevil/AlertTicker-Card) | Carte bandeau d'alerte défilant |
+| [Camera Detection Slider](https://github.com/Arubinu/camera-detection-slider) | Visualise les dernières détections de tes caméras |
 | [FileTrack](https://github.com/TheScubaDiver/FileTrack) | Capteur de suivi de fichiers dans un dossier (utilisé pour l'historique de détection) |
-| [mediocre-hass-media-player-cards](https://github.com/antontanderup/mediocre-hass-media-player-cards) | Cartes lecteur média améliorées |
-| [hash-timer-card](https://github.com/Arubinu/hash-timer-card) | Carte minuterie personnalisée |
-| `camera-detection-slider` | *(Dépôt à venir)* Carte curseur de détection caméra |
+| [Hash Timer Card](https://github.com/Arubinu/hash-timer-card) | Carte qui agit comme un routeur intelligent |
+| [Mediocre Media Player Cards](https://github.com/antontanderup/mediocre-hass-media-player-cards) | Cartes lecteur média améliorées |
 
 ### Style : card-mod ou uix (au choix)
 
@@ -101,9 +102,9 @@ Dupliquez le bloc capteur pour chaque caméra à surveiller. Le champ `filter` s
 ```yaml
 filetrack:
   sensors:
-    - name: 'Argus 1 FileTrack'
+    - name: 'Camera 1 FileTrack'
       folder: /config/www/media/Enregistrements
-      filter: 'Argus 1*'
+      filter: 'Camera 1*'
       sort: date
 ```
 

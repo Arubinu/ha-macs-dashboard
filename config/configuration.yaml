@@ -1,0 +1,23 @@
+default_config:
+
+homeassistant:
+  allowlist_external_dirs:
+    - /config/www/media/Enregistrements
+
+  media_dirs:
+    recordings: /media/Enregistrements
+
+sensor:
+  - platform: prix_carburant
+    stations:
+      - 00000000  # Replace with your station ID
+      - 00000000  # Replace with your station ID
+
+filetrack:
+  sensors:
+    - name: 'Camera 1 FileTrack'
+      folder: /config/www/media/Enregistrements
+      filter: 'Camera 1*'
+      sort: date
+
+template: !include templates.yaml

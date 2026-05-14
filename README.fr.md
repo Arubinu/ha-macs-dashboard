@@ -79,6 +79,10 @@ Pour le style des cartes, vous avez besoin de **l'un ou l'autre**. Les deux fonc
 | [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod) | Le plugin de style classique, très répandu |
 | [uix](https://github.com/Lint-Free-Technology/uix) | S'appuie sur card-mod en interne ; maintenu comme abstraction de plus haut niveau |
 
+### Petit plus
+
+Retrouvez une banque d'icônes animées ici: [https://www.flaticon.com/animated-icons-most-downloaded](https://www.flaticon.com/animated-icons-most-downloaded)
+
 ---
 
 ## ⚙️ Configuration

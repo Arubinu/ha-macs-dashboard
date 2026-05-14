@@ -910,17 +910,6 @@ views:
       size: auto
       repeat: repeat
       attachment: fixed
-      image:
-        media_content_id: media-source://image_upload/8c79646aa5f095c22c224e686e69b358
-        media_content_type: image/png
-        metadata:
-          title: black-dot.png
-          thumbnail: /api/image/serve/8c79646aa5f095c22c224e686e69b358/256x256
-          media_class: image
-          navigateIds:
-            - {}
-            - media_content_type: app
-              media_content_id: media-source://image_upload
     show_icon_and_title: false
   - type: sections
     sections:
@@ -1262,17 +1251,6 @@ views:
       size: auto
       repeat: repeat
       attachment: fixed
-      image:
-        media_content_id: media-source://image_upload/8c79646aa5f095c22c224e686e69b358
-        media_content_type: image/png
-        metadata:
-          title: black-dot.png
-          thumbnail: /api/image/serve/8c79646aa5f095c22c224e686e69b358/256x256
-          media_class: image
-          navigateIds:
-            - {}
-            - media_content_type: app
-              media_content_id: media-source://image_upload
     path: dashboard
     subview: true
   - type: panel

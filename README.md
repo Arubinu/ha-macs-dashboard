@@ -79,6 +79,10 @@ For card styling, you need **one** of the following. Both work — choose based 
 | [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod) | The classic, widely used card styling plugin |
 | [uix](https://github.com/Lint-Free-Technology/uix) | Uses card-mod internally; maintained as a higher-level abstraction |
 
+### Little extra
+
+Find a bank of animated icons here: [https://www.flaticon.com/animated-icons-most-downloaded](https://www.flaticon.com/animated-icons-most-downloaded)
+
 ---
 
 ## ⚙️ Configuration

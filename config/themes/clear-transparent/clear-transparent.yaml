@@ -2,6 +2,8 @@ clear-transparent:
   card-mod-theme: clear-transparent
   card-mod-root: |
     :host {
+      --view-background: black;
+
       --menu-border-width: 4px;
       --menu-background-color: rgb(24, 24, 24);
 

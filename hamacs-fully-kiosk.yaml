@@ -1011,30 +1011,29 @@ views:
                   background-color: rgba(255, 255, 255, .5);
                   z-index: 10;
                 }
-          - type: vertical-stack
+          - type: custom:bubble-card
+            card_type: pop-up
+            name: Télécommande AppleTV
+            icon: mdi:remote
+            hash: '#appletv'
+            button_type: name
+            sub_button:
+              main: []
+              bottom: []
+            scrolling_effect: false
+            show_icon: true
+            show_name: true
+            auto_close: '60000'
+            trigger_close: false
+            card_layout: normal
+            show_header: true
+            slide_to_close_distance: '400'
+            width_desktop: ''
+            bg_blur: '0'
+            bg_color: '#222'
+            hide_backdrop: true
+            bg_opacity: '95'
             cards:
-              - type: custom:bubble-card
-                card_type: pop-up
-                name: Télécommande AppleTV
-                icon: mdi:remote
-                hash: '#appletv'
-                button_type: name
-                sub_button:
-                  main: []
-                  bottom: []
-                scrolling_effect: false
-                show_icon: true
-                show_name: true
-                auto_close: '60000'
-                trigger_close: false
-                card_layout: normal
-                show_header: true
-                slide_to_close_distance: '400'
-                width_desktop: ''
-                bg_blur: '0'
-                bg_color: '#222'
-                hide_backdrop: true
-                bg_opacity: '95'
               - type: vertical-stack
                 cards:
                   - type: horizontal-stack
